@@ -25,13 +25,18 @@ spec:
     requests:
       storage: 10Gi
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgresql
   labels:
     app: drupal
+    environment: postgreSQL
 spec:
+  selector:
+      matchLabels:
+        app: drupal
+        environment: postgreSQL
   strategy:
     type: Recreate
   template:
@@ -39,6 +44,7 @@ spec:
       labels:
         app: drupal
         tier: postgreSQL
+        environment: postgreSQL
     spec:
       containers:
         - image: postgres:latest
