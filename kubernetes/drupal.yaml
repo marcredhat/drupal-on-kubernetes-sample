@@ -34,6 +34,11 @@ metadata:
   labels:
     app: drupal
 spec:
+  selector:
+      matchLabels:
+        app: drupal
+        #environment: frontend
+        tier: frontend
   strategy:
     type: Recreate
   template:
